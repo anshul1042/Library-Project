@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>My Borrowed Books</h1>
+<div class="row">
+    {% for borrowed in borrowed_books %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ borrowed.book.title }}</h5>
+                <p class="card-text">
+                    Author: {{ borrowed.book.author }}<br>
+                    Borrowed Date: {{ borrowed.borrow_date.strftime('%Y-%m-%d') }}<br>
+                    Due Date: {{ borrowed.due_date.strftime('%Y-%m-%d') }}
+                </p>
+                <div class="btn-group">
+                    <a href="{{ url_for('return_book', borrow_id=borrowed.id) }}" 
+                       class="btn btn-success">Return</a>
+                    <a href="{{ url_for('reissue_book', borrow_id=borrowed.id) }}" 
+                       class="btn btn-primary">Re-issue</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

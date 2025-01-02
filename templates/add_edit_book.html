@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">{% if book %}Edit{% else %}Add New{% endif %} Book</h2>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Book Title</label>
+                        <input type="text" class="form-control" id="title" name="title" 
+                               value="{{ book.title if book else '' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="author" class="form-label">Author</label>
+                        <input type="text" class="form-control" id="author" name="author"
+                               value="{{ book.author if book else '' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity"
+                               value="{{ book.quantity if book else 1 }}" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rack_id" class="form-label">Rack</label>
+                        <select class="form-control" id="rack_id" name="rack_id" required>
+                            {% for rack in racks %}
+                                <option value="{{ rack.id }}" 
+                                        {% if book and book.rack_id == rack.id %}selected{% endif %}>
+                                    Shelf {{ rack.shelf.name }} - Rack {{ rack.number }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        {% if book %}Update{% else %}Add{% endif %} Book
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

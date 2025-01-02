@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Add New Rack</h2>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="number" class="form-label">Rack Number</label>
+                        <input type="number" class="form-control" id="number" name="number" 
+                               min="1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="shelf_id" class="form-label">Shelf</label>
+                        <select class="form-control" id="shelf_id" name="shelf_id" required>
+                            {% for shelf in shelves %}
+                                <option value="{{ shelf.id }}">{{ shelf.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Rack</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

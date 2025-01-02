@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Add New Shelf</h2>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Shelf Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Shelf</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
