@@ -7,6 +7,10 @@ import os
 from functools import wraps
 from flask import g
 
+# Add at the top of app.py
+if not os.path.exists('instance'):
+    os.makedirs('instance')
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.db'
@@ -144,8 +148,10 @@ def add_shelf():
         db.session.add(shelf)
         db.session.commit()
         
-        # Generate QR code with URL
-        shelf_url = url_for('view_shelf', shelf_id=shelf.id, _external=True)
+        # Use your Render URL here
+        base_url = "https://library-management-project-in5j.onrender.com"  # Replace with your actual Render URL
+        shelf_url = f"{base_url}/shelf/{shelf.id}"
+        
         qr = qrcode.QRCode(version=1, box_size=10, border=5)
         qr.add_data(shelf_url)
         qr.make(fit=True)
